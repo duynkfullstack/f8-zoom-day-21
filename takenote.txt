@@ -1,0 +1,80 @@
+// Trong JS, tất cả các mảng đều kế thừa từ Array.prototype. Vì vậy khi học về thuộc tính và phương thức trong mảng
+// => Chính là học trong Array.prototype
+
+console.log(Array.prototype)
+
+// Phân loại các phương thức
+
+// Thay đổi mảng gốc:
+const myArray = ["Red", "Blue"]
+console.log(`Mảng gốc: ${myArray}`)
+
+// - push() : Thêm phần tử vào cuối mảng
+myArray.push("Green", "Yellow")
+console.log(`Sử dụng push(): ${myArray}`)
+
+// pop() : Xóa 1 phần tử cuối cùng của mảng
+
+myArray.pop()
+console.log(`Sử dụng pop(): ${myArray}`)
+
+// unshift() : Thêm phần tử vào đầu mảng
+
+myArray.unshift("1", 2, 3)
+console.log(`Sử dụng unshift(): ${myArray}`)
+
+// shift() : Xóa 1 phần tử đầu tiên của mảng
+myArray.shift()
+console.log(`Sử dụng shift(): ${myArray}`)
+
+// sort() : Sắp xếp mảng
+// - Khi không truyền hàm: Element sẽ được chuyển thành String rồi sắp xếp theo thứ tự Unicode(Từ điển)
+// - Truyền hàm: giúp so sánh số và object.
+//  => Tương tự cho mảng, nếu muốn sắp xếp mảng theo yếu tố nào đó thì so sánh yếu tố đó.
+
+const numbers = [10, 1, 3, 20]
+numbers.sort((a, b) => a - b) // Tăng dần
+console.log(numbers) // [1, 3, 10, 20]
+
+numbers.sort((a, b) => b - a) // Giảm dần
+console.log(numbers) // [20, 10, 3, 1]
+
+// reverse() : Đảo ngược mảng
+myArray.reverse()
+console.log(`Sử dụng reverse() : ${myArray}`)
+
+// Không thay đổi mảng gốc
+
+// map() - Tạo mảng mới với các phần tử đã biến đổi
+
+// filter() - Lọc các phần tử theo điều kiện
+// reduce() - Tích lũy thành một giá trị duy nhất
+// forEach() - Thực hiện hàm với mỗi phần tử
+// slice() - Trích xuất một phần của mảng
+// concat() - Nối các mảng
+// join() - Nối các phần tử thành chuỗi
+
+// 1. at(index) : Truy cập phần tử của mảng theo index, hỗ trợ index âm(-1 là cuối) => Trả về phần tử tương ứng trong mảng
+// 2. array.concat() : nối mảng => Một mảng mới chứa toàn bộ các phần tử của các mảng(Có thể dùng để sao chép mảng, vì ko tham chiếu)
+// 3. array.slice(start, end) : Cắt mảng => Mảng mới chứa các phần tử từ start -> end
+// 4. splice(start, deleteCount, string[]) => start: vị trí bắt đầu, deleteCount: Số lượng xóa, string[]: phần tử sẽ được thêm vào từ start, phần tử xóa đi sẽ được lưu trong một mảng mới
+
+let spliceArr = myArray.splice(1, 2, 2)
+console.log(spliceArr)
+console.log(myArray)
+
+Array.prototype.indexOf2 = function (str) {
+    let lengthArr = this.length
+    for (let i = 0; i < lengthArr; i++) {
+        if (str === this[i]) return i
+        return -1
+    }
+}
+
+console.log(myArray.indexOf2(5))
+
+// forEach(): Duyệt qua từng thằng trong mảng, mỗi lần lặp qua sẽ tự gọi hàm lại
+// array.forEach(function(element, index, array) {...logic...}, thisValue) => element: Thằng nó đang lặp qua, index: vị trí của thằng hiện tại
+
+arr.flat(n): Làm phẳng mảng => nhiều cấp thành ít cấp, tham số n là số cấp làm phẳng
+ 
