@@ -1,5 +1,4 @@
-// indexOf2
-
+// indexOf2 : Trả về vị trí index đầu tiên trong mảng trùng với giá trị truyền vào, nếu truyền start => Bắt đầu tìm từ start
 Array.prototype.indexOf2 = function (str, start) {
     let arrLength = this.length
     if (start) {
@@ -20,7 +19,7 @@ Array.prototype.indexOf2 = function (str, start) {
 }
 
 // include2
-Array.prototype.includes2 = function (str) {
+Array.prototype.includes2 = function (str, fromIndex) {
     let arrLength = this.length
     let hasElement = false
     for (let i = 0; i < arrLength; i++) {
@@ -30,8 +29,7 @@ Array.prototype.includes2 = function (str) {
             }
         }
     }
-    if (hasElement) return true
-    return false
+    return hasElement ? true : false
 }
 
 // forEach2
@@ -46,7 +44,7 @@ Array.prototype.forEach2 = function (callback, thisArg) {
     }
 }
 
-// filter2
+// filter2 : Tạo ra một mảng mới với các giá trị thỏa mãn các điều kiện trong hàm
 
 let arr2 = [1, 2, 4, 6, 8]
 
@@ -63,7 +61,7 @@ Array.prototype.filter2 = function (callback, thisArg) {
     return result
 }
 
-// reduce2
+// reduce2 : Thực hiện tính toán cho các phần tử trong mảng => Trả về một kết quả cuối cùng. Nếu truyền giá trị initialValue thì đó là giá trị khởi tạo, còn ko chuyền thì sẽ là giá trị đầu tiên của mảng
 
 Array.prototype.reduce2 = function (callback, initialValue) {
     let arrLength = this.length
@@ -89,7 +87,7 @@ Array.prototype.reduce2 = function (callback, initialValue) {
     return accumulator
 }
 
-// map2
+// map2 : Duyệt qua từng phần tử trong mảng và mỗi phần tử sẽ gọi làm hàm(Thực thi trong hàm cho mỗi phần tử) => Trả về mảng mới
 
 Array.prototype.map2 = function (callback, thisArg) {
     const length = this.length
@@ -103,6 +101,23 @@ Array.prototype.map2 = function (callback, thisArg) {
     return result
 }
 
+// every: Tất cả các phần tử trong mảng phải thỏa mãn điều kiện trong hàm => True. Ngược lại False
+Array.prototype.every2 = function (callback, thisArg) {
+    let arrLength = this.length
+    let isCorrect = false
+
+    for (let i = 0; i < arrLength; i++) {
+        if (i in this) {
+            if (callback.call(thisArg, this[i], i, this)) {
+                isCorrect = true
+            } else {
+                return false
+            }
+        }
+    }
+    return isCorrect
+}
+
 const numbers = [1, 2, 3, 4]
 const arr = [, 10, , 30]
 const pets = ["cat", , "dog", "fish"]
@@ -112,6 +127,13 @@ const users = [
     { name: "Bob", age: 17 },
     { name: "Charlie", age: 30 },
 ]
+
+// ---------- includes2 ----------
+console.log("-------------- includes2 --------------")
+
+console.log(numbers.includes2(2))
+console.log(mixed.includes2(NaN))
+console.log(arr.includes2(30))
 
 // ---------- forEach2 ----------
 console.log("-------------- forEach2 --------------")
@@ -155,3 +177,12 @@ console.log(
         return acc
     }, [])
 )
+
+// ---------- every2 ----------
+console.log("-------------- every2 --------------")
+
+console.log(numbers.every2((value) => typeof value === "number"))
+
+console.log(users.every2((user) => user.age < 18))
+
+console.log(pets.every2((value) => typeof value === "string"))
